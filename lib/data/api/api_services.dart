@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:eateries/data/model/restaurant_detail_response.dart';
 import 'package:eateries/data/model/restaurants_list_response.dart';
+import 'package:eateries/data/model/restaurants_search_result_response.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServices {
@@ -23,6 +24,18 @@ class ApiServices {
       return RestaurantResponse.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load restaurant detail');
+    }
+  }
+
+  Future<RestaurantsSearchResultResponse> getSearchRestaurants(
+      String query) async {
+    final response = await http.get(Uri.parse('$_baseUrl/search?q=$query'));
+
+    if (response.statusCode == 200) {
+      return RestaurantsSearchResultResponse.fromJson(
+          jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to search restaurants');
     }
   }
 }

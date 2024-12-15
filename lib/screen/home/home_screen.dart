@@ -25,7 +25,18 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("EATERIES")),
+        appBar: AppBar(
+          title: const Text("EATERIES"),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                // Arahkan ke halaman pencarian
+                Navigator.pushNamed(context, NavigationRoute.searchRoute.name);
+              },
+            ),
+          ],
+        ),
         body:
             Consumer<RestaurantsListProvider>(builder: (context, value, child) {
           return switch (value.resultState) {
