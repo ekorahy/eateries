@@ -1,4 +1,5 @@
 import 'package:eateries/provider/home/restaurants_list_provider.dart';
+import 'package:eateries/static/navigation_route.dart';
 import 'package:eateries/static/restaurants_list_result_state.dart';
 import 'package:eateries/widget/restaurant_card.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   final restaurant = restaurantList[index];
 
-                  return RestaurantCard(restaurant: restaurant, onTap: () {});
+                  return RestaurantCard(
+                      restaurant: restaurant,
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, NavigationRoute.detailRoute.name,
+                            arguments: restaurant.id);
+                      });
                 },
               ),
             RestaurantsListErrorState(error: var message) => Center(
