@@ -1,4 +1,5 @@
 import 'package:eateries/data/api/api_services.dart';
+import 'package:eateries/static/customer_review_result_state.dart';
 import 'package:eateries/static/restaurant_detail_result_state.dart';
 import 'package:flutter/widgets.dart';
 
@@ -8,8 +9,10 @@ class RestaurantDetailProvider extends ChangeNotifier {
   RestaurantDetailProvider(this._apiServices);
 
   RestaurantResultState _resultState = RestaurantNoneState();
+  CustomerReviewResultState _customerReviewState = CustomerReviewNoneState();
 
   RestaurantResultState get resultState => _resultState;
+  CustomerReviewResultState get customerReviewState => _customerReviewState;
 
   Future<void> fetchRestaurant(String id) async {
     try {
@@ -23,10 +26,31 @@ class RestaurantDetailProvider extends ChangeNotifier {
         notifyListeners();
       } else {
         _resultState = RestaurantLoadedState(result.restaurant);
+        _customerReviewState =
+            CustomerReviewLoadedState(result.restaurant.customerReviews);
         notifyListeners();
       }
     } on Exception catch (e) {
       _resultState = RestaurantErrorState(e.toString());
+      notifyListeners();
+    }
+  }
+
+  Future<void> postReview(String id, String name, String review) async {
+    try {
+      _customerReviewState = CustomerReviewLoadingState();
+
+      final result = await _apiServices.postReview(id, name, review);
+
+      if (result.error) {
+        _customerReviewState = CustomerReviewErrorState(result.message);
+        notifyListeners();
+      } else {
+        _customerReviewState = CustomerReviewLoadedState(result.customerReview);
+        notifyListeners();
+      }
+    } on Exception catch (e) {
+      _customerReviewState = CustomerReviewErrorState(e.toString());
       notifyListeners();
     }
   }

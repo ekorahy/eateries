@@ -29,12 +29,14 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Restaurant Detail")),
-      body: Consumer<RestaurantDetailProvider>(builder: (context, value, child) {
+      body:
+          Consumer<RestaurantDetailProvider>(builder: (context, value, child) {
         return switch (value.resultState) {
           RestaurantLoadingState() =>
             const Center(child: CircularProgressIndicator()),
-          RestaurantLoadedState(data: var restaurant) =>
-            BodyOfDetail(restaurant: restaurant),
+          RestaurantLoadedState(data: var restaurant) => BodyOfDetail(
+              restaurant: restaurant,
+            ),
           RestaurantErrorState(error: var message) =>
             Center(child: Text(message)),
           _ => const SizedBox()
