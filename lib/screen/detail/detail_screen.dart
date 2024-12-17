@@ -28,7 +28,9 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Restaurant Detail")),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+      ),
       body:
           Consumer<RestaurantDetailProvider>(builder: (context, value, child) {
         return switch (value.resultState) {

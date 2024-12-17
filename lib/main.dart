@@ -6,6 +6,7 @@ import 'package:eateries/screen/detail/detail_screen.dart';
 import 'package:eateries/screen/home/home_screen.dart';
 import 'package:eateries/screen/search/search_screen.dart';
 import 'package:eateries/static/navigation_route.dart';
+import 'package:eateries/style/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,8 +30,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    MaterialTheme theme = MaterialTheme();
+
     return MaterialApp(
       title: 'EATERIES',
+      theme: theme.light(),
+      darkTheme: theme.dark(),
+      themeMode: ThemeMode.system,
       initialRoute: NavigationRoute.mainRoute.name,
       routes: {
         NavigationRoute.mainRoute.name: (context) => const HomeScreen(),

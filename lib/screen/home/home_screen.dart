@@ -26,7 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("EATERIES"),
+          title: Text(
+            "EATERIES",
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
@@ -34,6 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Arahkan ke halaman pencarian
                 Navigator.pushNamed(context, NavigationRoute.searchRoute.name);
               },
+              style: IconButton.styleFrom(
+                backgroundColor: Theme.of(context)
+                    .colorScheme
+                    .primary, // Background menggunakan warna secondary
+                foregroundColor: Theme.of(context)
+                    .colorScheme
+                    .onPrimary, // Warna ikon menggunakan onSecondary
+                shape: const CircleBorder(), // Membuat tombol menjadi bundar
+              ),
             ),
           ],
         ),
