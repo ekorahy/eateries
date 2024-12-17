@@ -51,6 +51,8 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
           ),
           const SizedBox.square(dimension: 16),
           Center(
+              child: Hero(
+            tag: widget.restaurant.pictureId,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(80),
               child: Image.network(
@@ -58,7 +60,7 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                 fit: BoxFit.cover,
               ),
             ),
-          ),
+          )),
           const SizedBox.square(dimension: 16),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -68,14 +70,13 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surfaceContainer,
-                    borderRadius:
-                        BorderRadius.circular(30), // Menambahkan radius
+                    borderRadius: BorderRadius.circular(30),
                   ),
                   child: Column(
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.star, color: Colors.amber),
+                          const Icon(Icons.star, color: Color(0xFFFFD700)),
                           const SizedBox.square(
                             dimension: 4,
                           ),
@@ -95,16 +96,12 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                     ],
                   ),
                 ),
-                const SizedBox.square(
-                    dimension: 12.0), // Memberikan jarak antara kontainer
+                const SizedBox.square(dimension: 12.0),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .surfaceContainer, // Warna latar belakang
-                    borderRadius:
-                        BorderRadius.circular(30.0), // Menambahkan radius
+                    color: Theme.of(context).colorScheme.surfaceContainer,
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: Column(
                     children: [
@@ -131,16 +128,12 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                     ],
                   ),
                 ),
-                const SizedBox.square(
-                    dimension: 12.0), // Memberikan jarak antara kontainer
+                const SizedBox.square(dimension: 12.0),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .surfaceContainer, // Warna latar belakang
-                    borderRadius:
-                        BorderRadius.circular(30.0), // Menambahkan radius
+                    color: Theme.of(context).colorScheme.surfaceContainer,
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: Column(
                     children: [
@@ -174,10 +167,8 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .surfaceContainer, // Warna latar belakang
-              borderRadius: BorderRadius.circular(16.0), // Menambahkan radius
+              color: Theme.of(context).colorScheme.surfaceContainer,
+              borderRadius: BorderRadius.circular(16.0),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -237,8 +228,7 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                                         right: -20,
                                         child: Container(
                                           width: 100,
-                                          height:
-                                              100, // Sesuaikan tinggi sesuai dengan gambar
+                                          height: 100,
                                           decoration: const BoxDecoration(
                                             image: DecorationImage(
                                               image: AssetImage(
@@ -304,8 +294,7 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                                         right: -20,
                                         child: Container(
                                           width: 100,
-                                          height:
-                                              100, // Sesuaikan tinggi sesuai dengan gambar
+                                          height: 100,
                                           decoration: const BoxDecoration(
                                             image: DecorationImage(
                                               image: AssetImage(
@@ -344,10 +333,8 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
           Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .primaryContainer, // Warna latar belakang
-              borderRadius: BorderRadius.circular(20.0), // Menambahkan radius
+              color: Theme.of(context).colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(20.0),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -379,27 +366,21 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                             color: Theme.of(context)
                                 .colorScheme
                                 .onPrimary
-                                .withOpacity(0.7), // Warna placeholder
+                                .withOpacity(0.7),
                           ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary, // Warna border saat tidak fokus
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary, // Warna border saat fokus
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                         ),
                         style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimary, // Warna teks input
+                          color: Theme.of(context).colorScheme.onPrimary,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -424,27 +405,21 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                             color: Theme.of(context)
                                 .colorScheme
                                 .onPrimary
-                                .withOpacity(0.7), // Warna placeholder
+                                .withOpacity(0.7),
                           ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary, // Warna border saat tidak fokus
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary, // Warna border saat fokus
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                         ),
                         style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimary, // Warna teks input
+                          color: Theme.of(context).colorScheme.onPrimary,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -458,9 +433,8 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                         child: ElevatedButton(
                           onPressed: _addReview,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Theme.of(context)
-                                .colorScheme
-                                .primary, // Warna tombol
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primary,
                           ),
                           child: Text(
                             "Submit Review",
@@ -508,32 +482,43 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                           decoration: BoxDecoration(
                             color:
                                 Theme.of(context).colorScheme.surfaceContainer,
-                            borderRadius:
-                                BorderRadius.circular(16), // Menambahkan radius
+                            borderRadius: BorderRadius.circular(16),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 children: [
-                                  const Icon(Icons.account_circle_rounded,size: 40,),
-                                  const SizedBox.square(dimension: 4,),
+                                  const Icon(
+                                    Icons.account_circle_rounded,
+                                    size: 40,
+                                  ),
+                                  const SizedBox.square(
+                                    dimension: 4,
+                                  ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                    review.name,
-                                    style: Theme.of(context).textTheme.titleSmall),
-                                    const SizedBox.square(dimension: 4,),
-                                    Text(
-                                    review.date,
-                                    style: Theme.of(context).textTheme.labelMedium)
+                                      Text(review.name,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall),
+                                      const SizedBox.square(
+                                        dimension: 4,
+                                      ),
+                                      Text(review.date,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelMedium)
                                     ],
                                   )
                                 ],
                               ),
                               const SizedBox(height: 8),
-                              Text(review.review, style: Theme.of(context).textTheme.bodyMedium),
+                              Text(review.review,
+                                  style:
+                                      Theme.of(context).textTheme.bodyMedium),
                             ],
                           ),
                         ),
@@ -541,9 +526,15 @@ class _BodyOfDetailState extends State<BodyOfDetail> {
                     },
                   ),
                 CustomerReviewErrorState(error: var message) => Center(
-                    child: Text(
-                      message,
-                      style: const TextStyle(color: Colors.red),
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Text(
+                        message,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 _ => const SizedBox(),

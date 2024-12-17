@@ -18,10 +18,12 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
 
-    Future.microtask(() {
-      context
-          .read<RestaurantDetailProvider>()
-          .fetchRestaurant(widget.restaurantId);
+    Future.microtask(() async {
+      if (mounted) {
+        await context
+            .read<RestaurantDetailProvider>()
+            .fetchRestaurant(widget.restaurantId);
+      }
     });
   }
 
@@ -39,8 +41,18 @@ class _DetailScreenState extends State<DetailScreen> {
           RestaurantLoadedState(data: var restaurant) => BodyOfDetail(
               restaurant: restaurant,
             ),
-          RestaurantErrorState(error: var message) =>
-            Center(child: Text(message)),
+          RestaurantErrorState(error: var message) => Center(
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                child: Text(
+                  message,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.error,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           _ => const SizedBox()
         };
       }),

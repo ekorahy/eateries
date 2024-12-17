@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:eateries/data/api/api_services.dart';
 import 'package:eateries/static/restaurants_search_result_state.dart';
 import 'package:flutter/widgets.dart';
@@ -21,13 +22,15 @@ class RestaurantsSearchProvider extends ChangeNotifier {
       if (result.error) {
         _resultState =
             RestaurantsSearchErrorState('Failed to search restaurants');
-        notifyListeners();
       } else {
         _resultState = RestaurantsSearchLoadedState(result.restaurants);
-        notifyListeners();
       }
-    } on Exception catch (e) {
+    } on SocketException catch (_) {
+      _resultState = RestaurantsSearchErrorState(
+          "Request Timeout. Please check your internet connection.");
+    } catch (e) {
       _resultState = RestaurantsSearchErrorState(e.toString());
+    } finally {
       notifyListeners();
     }
   }
