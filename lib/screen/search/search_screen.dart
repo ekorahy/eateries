@@ -19,19 +19,19 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search Restaurants"),
+        backgroundColor: Theme.of(context).colorScheme.surface,
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          Container(
+            padding: const EdgeInsets.all(16),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: "Search for restaurants...",
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.clear),
@@ -44,7 +44,15 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               onSubmitted: (query) {
-                if (query.isNotEmpty) {
+                if (query.trim().isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Search field cannot be empty!"),
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.redAccent,
+                    ),
+                  );
+                } else {
                   context
                       .read<RestaurantsSearchProvider>()
                       .fetchRestaurantsSearch(query);
@@ -76,8 +84,11 @@ class _SearchScreenState extends State<SearchScreen> {
                               );
                             },
                           )
-                        : const Center(
-                            child: Text("No restaurants found."),
+                        : Center(
+                            child: Text(
+                              "No restaurants found.",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
                           ),
                   RestaurantsSearchErrorState(error: var message) =>
                     Center(child: Text(message)),
