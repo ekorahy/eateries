@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:eateries/data/api/api_services.dart';
 import 'package:eateries/static/customer_review_result_state.dart';
 import 'package:eateries/static/restaurant_detail_result_state.dart';
@@ -23,15 +24,17 @@ class RestaurantDetailProvider extends ChangeNotifier {
 
       if (result.error) {
         _resultState = RestaurantErrorState(result.message);
-        notifyListeners();
       } else {
         _resultState = RestaurantLoadedState(result.restaurant);
         _customerReviewState =
             CustomerReviewLoadedState(result.restaurant.customerReviews);
-        notifyListeners();
       }
-    } on Exception catch (e) {
+    } on SocketException catch (_) {
+      _resultState = RestaurantErrorState(
+          "Request Timeout. Please check your internet connection.");
+    } catch (e) {
       _resultState = RestaurantErrorState(e.toString());
+    } finally {
       notifyListeners();
     }
   }
@@ -44,13 +47,15 @@ class RestaurantDetailProvider extends ChangeNotifier {
 
       if (result.error) {
         _customerReviewState = CustomerReviewErrorState(result.message);
-        notifyListeners();
       } else {
         _customerReviewState = CustomerReviewLoadedState(result.customerReview);
-        notifyListeners();
       }
-    } on Exception catch (e) {
+    } on SocketException catch (_) {
+      _customerReviewState = CustomerReviewErrorState(
+          "Request Timeout. Please check your internet connection.");
+    } catch (e) {
       _customerReviewState = CustomerReviewErrorState(e.toString());
+    } finally {
       notifyListeners();
     }
   }

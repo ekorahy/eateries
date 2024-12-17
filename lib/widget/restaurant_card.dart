@@ -16,30 +16,30 @@ class RestaurantCard extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color:
-                Theme.of(context).colorScheme.surfaceContainer, // Warna latar belakang
-            borderRadius: BorderRadius.circular(12.0), // Menambahkan radius
+            color: Theme.of(context).colorScheme.surfaceContainer,
+            borderRadius: BorderRadius.circular(12.0),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Contoh penggunaan widget di dalam Container
-              ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxHeight: 80,
-                  minHeight: 80,
-                  maxWidth: 120,
-                  minWidth: 120,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    "https://restaurant-api.dicoding.dev/images/small/${restaurant.pictureId}",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              Hero(
+                  tag: restaurant.pictureId,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxHeight: 80,
+                      minHeight: 80,
+                      maxWidth: 120,
+                      minWidth: 120,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(
+                        "https://restaurant-api.dicoding.dev/images/small/${restaurant.pictureId}",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )),
               const SizedBox.square(
                 dimension: 16.0,
               ),

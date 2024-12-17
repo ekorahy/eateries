@@ -17,8 +17,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    Future.microtask(() {
-      context.read<RestaurantsListProvider>().fetchRestaurantsList();
+    Future.microtask(() async {
+      if (mounted) {
+        await context.read<RestaurantsListProvider>().fetchRestaurantsList();
+      }
     });
   }
 
@@ -34,17 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {
-                // Arahkan ke halaman pencarian
                 Navigator.pushNamed(context, NavigationRoute.searchRoute.name);
               },
               style: IconButton.styleFrom(
-                backgroundColor: Theme.of(context)
-                    .colorScheme
-                    .primary, // Background menggunakan warna secondary
-                foregroundColor: Theme.of(context)
-                    .colorScheme
-                    .onPrimary, // Warna ikon menggunakan onSecondary
-                shape: const CircleBorder(), // Membuat tombol menjadi bundar
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                shape: const CircleBorder(),
               ),
             ),
           ],
@@ -70,7 +67,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             RestaurantsListErrorState(error: var message) => Center(
-                child: Text(message),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    message,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
             _ => const SizedBox(),
           };
