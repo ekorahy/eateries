@@ -1,8 +1,8 @@
 import 'package:eateries/provider/search/restaurants_search_provider.dart';
 import 'package:eateries/static/navigation_route.dart';
-import 'package:flutter/material.dart';
 import 'package:eateries/static/restaurants_search_result_state.dart';
 import 'package:eateries/widget/restaurant_card.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {

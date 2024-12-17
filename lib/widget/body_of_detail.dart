@@ -1,7 +1,7 @@
+import 'package:eateries/data/model/restaurant_detail.dart';
 import 'package:eateries/provider/detail/restaurant_detail_provider.dart';
 import 'package:eateries/static/customer_review_result_state.dart';
 import 'package:flutter/material.dart';
-import 'package:eateries/data/model/restaurant_detail.dart';
 import 'package:provider/provider.dart';
 
 class BodyOfDetail extends StatefulWidget {

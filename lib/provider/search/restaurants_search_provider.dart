@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:eateries/data/api/api_services.dart';
 import 'package:eateries/static/restaurants_search_result_state.dart';
 import 'package:flutter/widgets.dart';
