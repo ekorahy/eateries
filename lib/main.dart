@@ -1,9 +1,10 @@
 import 'package:eateries/data/api/api_services.dart';
 import 'package:eateries/provider/detail/restaurant_detail_provider.dart';
 import 'package:eateries/provider/home/restaurants_list_provider.dart';
+import 'package:eateries/provider/main/index_nav_provider.dart';
 import 'package:eateries/provider/search/restaurants_search_provider.dart';
 import 'package:eateries/screen/detail/detail_screen.dart';
-import 'package:eateries/screen/home/home_screen.dart';
+import 'package:eateries/screen/main/main_screen.dart';
 import 'package:eateries/screen/search/search_screen.dart';
 import 'package:eateries/static/navigation_route.dart';
 import 'package:eateries/style/theme/theme.dart';
@@ -21,7 +22,8 @@ void main() {
             RestaurantDetailProvider(context.read<ApiServices>())),
     ChangeNotifierProvider(
         create: (context) =>
-            RestaurantsSearchProvider(context.read<ApiServices>()))
+            RestaurantsSearchProvider(context.read<ApiServices>())),
+    ChangeNotifierProvider(create: (context) => IndexNavProvider())
   ], child: const MyApp()));
 }
 
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       initialRoute: NavigationRoute.mainRoute.name,
       routes: {
-        NavigationRoute.mainRoute.name: (context) => const HomeScreen(),
+        NavigationRoute.mainRoute.name: (context) => const MainScreen(),
         NavigationRoute.detailRoute.name: (context) => DetailScreen(
               restaurantId:
                   ModalRoute.of(context)?.settings.arguments as String,
