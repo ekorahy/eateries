@@ -1,6 +1,9 @@
+import 'package:eateries/data/model/restaurant.dart';
+import 'package:eateries/provider/detail/favorite_icon_provider.dart';
 import 'package:eateries/provider/detail/restaurant_detail_provider.dart';
 import 'package:eateries/static/restaurant_detail_result_state.dart';
 import 'package:eateries/widget/body_of_detail.dart';
+import 'package:eateries/widget/favorite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +34,33 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        title: Center(
+          child: Text(
+            "Restaurant Detail",
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        ),
+        actions: [
+          ChangeNotifierProvider(
+            create: (context) => FavoriteIconProvider(),
+            child: Consumer<RestaurantDetailProvider>(
+                builder: (context, value, child) {
+              return switch (value.resultState) {
+                RestaurantLoadedState(data: var value) => FavoriteIcon(
+                    restaurant: Restaurant(
+                      id: value.id,
+                      name: value.name,
+                      description: value.description,
+                      pictureId: value.pictureId,
+                      city: value.city,
+                      rating: value.rating,
+                    ),
+                  ),
+                _ => const SizedBox(),
+              };
+            }),
+          )
+        ],
       ),
       body:
           Consumer<RestaurantDetailProvider>(builder: (context, value, child) {

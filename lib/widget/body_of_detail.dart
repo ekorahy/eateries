@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class BodyOfDetail extends StatefulWidget {
-  final Restaurant restaurant;
+  final RestaurantDetail restaurant;
 
   const BodyOfDetail({super.key, required this.restaurant});
 
