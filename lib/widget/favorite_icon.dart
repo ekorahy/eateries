@@ -22,7 +22,7 @@ class _FavoriteIconState extends State<FavoriteIcon> {
     Future.microtask(() async {
       await localDatabaseProvider.loadRestaurantById(widget.restaurant.name);
       final value =
-          localDatabaseProvider.restaurant!.name == widget.restaurant.name;
+          localDatabaseProvider.restaurant?.name == widget.restaurant.name;
 
       favoriteIconProvider.isFavorite = value;
     });
