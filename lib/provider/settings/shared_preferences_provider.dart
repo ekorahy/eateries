@@ -10,7 +10,7 @@ class SharedPreferencesProvider extends ChangeNotifier {
   String _message = "";
   String get message => _message;
 
-  Setting _setting = Setting(isDarkMode: false);
+  Setting _setting = Setting(isDarkMode: false, isDailyReminderOn: false);
   Setting get setting => _setting;
 
   Future<void> saveSettingValue(Setting value) async {
@@ -32,5 +32,10 @@ class SharedPreferencesProvider extends ChangeNotifier {
       _message = "Failed to get your data";
     }
     notifyListeners();
+  }
+
+  Future<void> toggleDailyReminder(bool value) async {
+    final updatedSetting = _setting.copyWith(isDailyReminderOn: value);
+    await saveSettingValue(updatedSetting);
   }
 }

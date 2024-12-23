@@ -7,10 +7,12 @@ class SharedPreferencesService {
   SharedPreferencesService(this._preferences);
 
   static const String keyTheme = "THEME";
+  static const String keyDailyReminder = "DAILY_REMINDER";
 
   Future<void> saveSettingValue(Setting setting) async {
     try {
       await _preferences.setBool(keyTheme, setting.isDarkMode);
+      await _preferences.setBool(keyDailyReminder, setting.isDailyReminderOn);
     } catch (e) {
       throw Exception("Shared preferences cannot save the setting value.");
     }
@@ -18,6 +20,10 @@ class SharedPreferencesService {
 
   Setting getSettingValue() {
     final isDarkMode = _preferences.getBool(keyTheme) ?? false;
-    return Setting(isDarkMode: isDarkMode);
+    final isDailyReminderOn = _preferences.getBool(keyDailyReminder) ?? false;
+    return Setting(
+      isDarkMode: isDarkMode,
+      isDailyReminderOn: isDailyReminderOn,
+    );
   }
 }

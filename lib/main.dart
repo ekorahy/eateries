@@ -12,6 +12,8 @@ import 'package:eateries/services/shared_preferences_service.dart';
 import 'package:eateries/services/sqlite_service.dart';
 import 'package:eateries/static/navigation_route.dart';
 import 'package:eateries/style/theme/theme.dart';
+import 'package:eateries/utils/notification_helper.dart';
+import 'package:eateries/utils/workmanager_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +21,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
+
+  initializeNotifications();
+
+  initializeWorkManager();
 
   runApp(
     MultiProvider(
@@ -44,9 +50,21 @@ void main() async {
               LocalDatabaseProvider(context.read<SqliteService>()),
         ),
         ChangeNotifierProvider(
-          create: (context) => SharedPreferencesProvider(
-              context.read<SharedPreferencesService>())
-            ..getSettingValue(),
+          create: (context) {
+            final provider = SharedPreferencesProvider(
+              context.read<SharedPreferencesService>(),
+            )..getSettingValue();
+
+            provider.getSettingValue().then((_) {
+              if (provider.setting.isDailyReminderOn) {
+                scheduleDailyReminder();
+              } else {
+                cancelDailyReminder();
+              }
+            });
+
+            return provider;
+          },
         ),
       ],
       child: const MyApp(),
